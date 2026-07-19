@@ -1,0 +1,234 @@
+<div class="w-full min-h-screen pt-4 pb-6 md:pt-10 md:pb-6 bg-[var(--bg-transparent)] text-[var(--text-taupe)]">
+
+    <div class="max-w-6xl mx-auto px-6 md:px-10">
+        <!-- Section Title with Sparkle (Completely Unchanged) -->
+        <div class="flex flex-col items-center justify-center text-center mb-4">
+            <div class="inline-flex flex-col items-start">
+            <h2 class="font-serif text-3xl md:text-4xl flex items-center gap-3 ">
+
+                <!-- The gradient is applied to this span to protect the SVG -->
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-pink-dark)] to-[var(--text-taupe)]">
+                    Your Favorite Product is Here.
+                </span>
+
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"
+                    class="w-7 h-7 mt-2 mr-2 text-[var(--brand-pink-dark)] overflow-visible cursor-pointer">
+
+                    <!-- Self-contained animation styles -->
+                    <style>
+                        .pearl-drape {
+                            transform-origin: center top;
+                            animation: gentle-swing 4s ease-in-out infinite;
+                            filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 0.1));
+                            transition: all 0.4s ease;
+                        }
+
+                        svg:hover .pearl-drape {
+                            animation: gentle-swing-hover 2s ease-in-out infinite;
+                            filter: drop-shadow(0px 0px 8px currentColor);
+                        }
+
+                        @keyframes gentle-swing {
+
+                            0%,
+                            100% {
+                                transform: rotate(-2deg) translateY(0px);
+                            }
+
+                            50% {
+                                transform: rotate(2deg) translateY(-3px);
+                            }
+                        }
+
+                        @keyframes gentle-swing-hover {
+
+                            0%,
+                            100% {
+                                transform: scale(1.05) rotate(-3deg) translateY(-2px);
+                            }
+
+                            50% {
+                                transform: scale(1.05) rotate(3deg) translateY(-6px);
+                            }
+                        }
+                    </style>
+
+                    <!-- Wrapped the cute daisy in the animated group -->
+                    <g class="pearl-drape">
+                        <!-- 5 Plump Petals -->
+                        <circle cx="12" cy="6" r="4.5" />
+                        <circle cx="17.7" cy="10.15" r="4.5" />
+                        <circle cx="15.5" cy="16.85" r="4.5" />
+                        <circle cx="8.5" cy="16.85" r="4.5" />
+                        <circle cx="6.3" cy="10.15" r="4.5" />
+
+                        <!-- Center Cutout (uses your background variable to look hollow/aesthetic!) -->
+                        <circle cx="12" cy="12" r="3" fill="var(--bg-transparent)" />
+                    </g>
+                </svg>
+            </h2>
+            <div class="w-24 h-[2px] bg-gradient-to-r from-[var(--brand-pink)] to-transparent mt-2"></div>
+            </div>
+        </div>
+
+        <!-- Premium Back Button (Reduced mb-8 to mb-4) -->
+        <a routerLink="/"
+            class="group inline-flex items-center gap-2 text-sm font-medium tracking-wide text-[var(--text-taupe)]/90 hover:text-[var(--brand-pink-dark)] transition-colors duration-300 mb-4 cursor-pointer">
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Products
+        </a>
+
+        @if (product()) {
+        <!-- Main Product Card -->
+        <div
+            class="bg-[var(--surface-white)] rounded-[2.5rem] shadow-[0_20px_60px_rgba(232,122,144,0.08)] border border-[var(--line-soft)]/30 flex flex-col md:flex-row overflow-hidden relative">
+
+            <!-- Left Side: Magical Image Display (Reduced heavy padding to save height) -->
+            <div
+                class="w-full md:w-1/2 p-8 md:p-10 flex items-center justify-center bg-gradient-to-br from-white to-[var(--bg-slider)]/60 relative group">
+                <div class="absolute top-10 left-10 opacity-20 text-[var(--brand-pink-dark)]">
+                    <svg class="w-8 h-8 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5L12 0z" />
+                    </svg>
+                </div>
+                <img [src]="product()?.imageURL" [alt]="product()?.name" title="Product image"
+                    class="w-full max-w-xs lg:max-w-sm rounded-2xl shadow-lg transition-transform duration-700 ease-out group-hover:scale-105 group-hover:shadow-[0_20px_50px_rgba(232,122,144,0.2)] relative z-10">
+            </div>
+
+            <!-- Right Side: Elegant Product Details (Reduced padding and bottom margins) -->
+            <div class="w-full md:w-1/2 p-6 md:p-10 lg:p-12 flex flex-col justify-center bg-[var(--surface-white)]">
+
+                <!-- Dynamic Category Badge (mb-6 to mb-4) -->
+                <span
+                    class="px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full text-[var(--brand-pink-dark)] bg-[var(--brand-pink)]/10 w-fit mb-4 border border-[var(--brand-pink)]/20">
+                    {{ product()?.category }}
+                </span>
+
+                <!-- Dynamic Name (mb-4 to mb-2, adjusted text-5xl to text-4xl to prevent tall wrapping) -->
+                <h1 class="font-serif text-4xl md:text-5xl lg:text-4xl text-[var(--text-taupe)] mb-2 leading-tight">
+                    {{ product()?.name }}
+                </h1>
+
+                <!-- Stars (mb-6 to mb-4) -->
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="flex text-[var(--brand-pink-dark)]">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="w-4 h-4 fill-current opacity-40" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-[var(--text-taupe)]/60 ml-2">5.0</span>
+                </div>
+
+                <!-- Dynamic Description (mb-8 to mb-5) -->
+                <p class="text-[var(--text-taupe)]/90 leading-relaxed mb-5 text-sm md:text-base font-medium">
+                    This stunning and delicate accessory can be Customized to your liking, making it a truly unique and
+                    personal piece.
+                </p>
+
+                <!-- Dynamic Price (mb-10 to mb-6) -->
+                <div class="flex items-end gap-4 mb-6">
+                    <span class="text-4xl font-serif text-[var(--brand-pink-dark)] leading-none">
+                        {{ product()?.price | currency }}
+                    </span>
+                    @if (product()?.originalPrice) {
+                    <span class="text-lg text-[var(--text-taupe)]/40 line-through mb-1">
+                        {{ product()?.originalPrice | currency }}
+                    </span>
+                    }
+                </div>
+
+                <!-- Action Buttons (Changed h-14 to h-12 to save vertical space) -->
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+
+                    <!-- Add to Cart -->
+                    <button (click)="addToCart()"
+                        class="w-full sm:flex-1 h-12 bg-[var(--brand-pink-dark)] text-[var(--surface-white)] rounded-full flex items-center justify-center gap-3 font-semibold uppercase tracking-widest text-xs transition-all duration-400 ease-out hover:bg-[var(--text-taupe)] hover:shadow-[0_15px_30px_rgba(74,65,59,0.3)] hover:-translate-y-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        Add to Cart
+                    </button>
+
+                    <!-- Wishlist Button -->
+                    <button (click)="toggleWishlist()" [class.border-[var(--brand-pink-dark)]]="isInWishlist()"
+                        [class.text-[var(--brand-pink-dark)]]="isInWishlist()"
+                        class="w-full sm:w-12 h-12 border-2 border-[var(--line-soft)]/50 rounded-full flex items-center justify-center text-[var(--text-taupe)] transition-all duration-400 ease-out hover:border-[var(--brand-pink-dark)] hover:text-[var(--brand-pink-dark)] hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(232,122,144,0.15)] group"
+                        aria-label="Add to Wishlist">
+
+                        <svg class="w-6 h-6 transition-transform group-hover:scale-110"
+                            [attr.fill]="isInWishlist() ? 'currentColor' : 'none'" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span class="sm:hidden font-semibold uppercase tracking-widest text-xs ml-2">
+                            {{ isInWishlist() ? 'Remove from Wishlist' : 'Add to Wishlist' }}
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Stock Divider Section (mt-8 pt-6 changed to mt-6 pt-5) -->
+                <div class="mt-6 pt-5 relative flex items-center gap-4">
+                    <!-- Elegant Fading Divider -->
+                    <div
+                        class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[var(--brand-pink-dark)]/40 via-[var(--brand-pink-dark)]/10 to-transparent">
+                    </div>
+
+                    <!-- Refined Icon Wrapper with Subtle Depth -->
+                    <div
+                        class="relative w-10 h-10 rounded-full bg-gradient-to-br from-white/40 to-transparent flex items-center justify-center shrink-0 border border-[var(--brand-pink-dark)]/20 shadow-[inset_0_2px_4px_rgba(255,255,255,0.8)]">
+
+                        <!-- Soft glow behind the icon -->
+                        <div class="absolute inset-0 rounded-full bg-[var(--brand-pink)]/10 blur-[2px]"></div>
+
+                        <!-- A more "complete", bolder tick -->
+                        <svg class="w-5 h-5 text-[var(--brand-pink-dark)] relative z-10" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+
+                    <!-- Your Original Clean Font Style -->
+                    <div class="text-sm font-medium text-[var(--text-taupe)]/90">
+                        In stock and ready to be beautifully packaged
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        } @else {
+        <!-- Beautiful Empty State if Product Not Found -->
+        <div
+            class="text-center py-20 bg-[var(--surface-white)] rounded-[2.5rem] shadow-[0_20px_60px_rgba(232,122,144,0.05)] border border-[var(--line-soft)]/30">
+            <h2 class="font-serif text-3xl text-[var(--brand-pink-dark)] mb-4">Product Not Found</h2>
+            <p class="text-[var(--text-taupe)]/80 mb-8">It seems this piece of magic is currently unavailable.</p>
+            <a routerLink="/"
+                class="px-8 py-3 bg-[var(--text-taupe)] text-[var(--surface-white)] rounded-full font-semibold uppercase tracking-widest text-xs hover:bg-[var(--brand-pink-dark)] transition-colors">
+                Return to Boutique
+            </a>
+        </div>
+        }
+    </div>
+</div>

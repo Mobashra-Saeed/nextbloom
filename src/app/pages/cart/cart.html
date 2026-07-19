@@ -1,0 +1,166 @@
+<div class="w-full min-h-screen pt-4 pb-12 bg-[var(--bg-transparent)] text-[var(--text-taupe)]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Continue Shopping Back Button -->
+        <a routerLink="/products"
+            class="group inline-flex items-center gap-2 text-sm font-medium tracking-wide text-[var(--text-taupe)]/90 hover:text-[var(--brand-pink-dark)] transition-colors duration-300 mb-6 cursor-pointer">
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Continue Shopping
+        </a>
+
+        <!-- Magical Header Area -->
+        <div class="flex flex-col items-start mb-8 relative">
+            <h1 class="font-serif text-3xl md:text-4xl flex items-center gap-3 relative">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-pink-dark)] to-[var(--text-taupe)]">
+                    Your Magic Pouch
+                </span>
+                
+                <!-- Floating Fairy Sparkle SVG -->
+                <svg class="w-6 h-6 text-[var(--brand-pink-dark)] animate-pulse overflow-visible" viewBox="0 0 24 24" fill="currentColor">
+                    <style>
+                        .sparkle-spin {
+                            transform-origin: center;
+                            animation: gentle-spin 6s linear infinite;
+                        }
+                        @keyframes gentle-spin {
+                            0% { transform: rotate(0deg) scale(1); }
+                            50% { transform: rotate(180deg) scale(1.15); }
+                            100% { transform: rotate(360deg) scale(1); }
+                        }
+                    </style>
+                    <g class="sparkle-spin">
+                        <path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+                    </g>
+                </svg>
+            </h1>
+            <div class="w-20 h-[1px] bg-gradient-to-r from-[var(--brand-pink)] to-transparent mt-2"></div>
+        </div>
+
+        <!-- Main Cart Grid Structure -->
+        @if (cartItems().length > 0) {
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                
+                <!-- Left Side: Items List (Takes 2 Columns on desktop) -->
+                <div class="lg:col-span-2 space-y-4">
+                    @for (item of cartItems(); track item.id) {
+                        <div class="bg-[var(--surface-white)] rounded-[2rem] p-4 sm:p-5 shadow-[0_10px_40px_rgba(232,122,144,0.04)] border border-[var(--line-soft)]/30 flex flex-row items-center gap-4 sm:gap-6 relative group hover:shadow-[0_15px_40px_rgba(232,122,144,0.09)] transition-all duration-400">
+                            
+                            <!-- Product Image Container -->
+                            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-gradient-to-br from-[var(--surface-white)] to-[var(--bg-slider)]/40 flex items-center justify-center border border-[var(--line-soft)]/20 shrink-0 relative">
+                                <img [src]="item.imageURL" alt="{{ item.name }}" title="{{ item.name }}" class="w-4/5 h-4/5 object-contain transition-transform duration-500 group-hover:scale-105" />
+                            </div>
+
+                            <!-- Product Text Details -->
+                            <div class="flex-1 flex flex-col min-w-0 pr-4">
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-[var(--brand-pink-dark)]/70 mb-1">
+                                    {{ item.category }}
+                                </span>
+                                <h3 class="font-serif text-base sm:text-lg text-[var(--text-taupe)] truncate mb-1">
+                                    {{ item.name }}
+                                </h3>
+                                <p class="text-xs text-[var(--text-taupe)]/60 line-clamp-1 mb-2 hidden sm:block">
+                                    Customized premium aesthetic jewelry handcrafted with pure love.
+                                </p>
+                                <span class="text-lg font-serif text-[var(--brand-pink-dark)]">
+                                    {{ item.price | currency }}
+                                </span>
+                            </div>
+
+                            <!-- Right Utilities Side (Quantity & Remove) -->
+                            <div class="flex flex-col items-end justify-between h-24 sm:h-28 shrink-0">
+                                <!-- Remove Item Button -->
+                                <button (click)="removeItem(item.id)" 
+                                    class="text-[var(--text-taupe)]/40 hover:text-[var(--brand-pink-dark)] p-1.5 rounded-full hover:bg-[var(--brand-pink)]/10 transition-all duration-300 group/btn"
+                                    aria-label="Remove item">
+                                    <svg class="w-5 h-5 transition-transform group-hover/btn:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+
+                                <!-- Beautiful Fairy-Themed Mini Quantity Selector -->
+                                <div class="flex items-center border border-[var(--line-soft)]/40 rounded-full bg-[var(--bg-slider)]/20 p-0.5 shadow-sm">
+                                    <button (click)="decreaseQty(item)" class="w-7 h-7 flex items-center justify-center rounded-full text-xs hover:bg-[var(--surface-white)] text-[var(--text-taupe)] hover:text-[var(--brand-pink-dark)] transition-all duration-200 font-bold">-</button>
+                                    <span class="px-2.5 text-xs font-semibold text-[var(--text-taupe)] min-w-[20px] text-center">{{ item.quantity }}</span>
+                                    <button (click)="increaseQty(item)" class="w-7 h-7 flex items-center justify-center rounded-full text-xs hover:bg-[var(--surface-white)] text-[var(--text-taupe)] hover:text-[var(--brand-pink-dark)] transition-all duration-200 font-bold">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Right Side: Magical Order Summary Sticky Card -->
+                <div class="bg-[var(--surface-white)] rounded-[2.5rem] p-6 lg:p-8 shadow-[0_20px_50px_rgba(232,122,144,0.06)] border border-[var(--line-soft)]/30 relative overflow-hidden lg:sticky lg:top-6">
+                    <!-- Subtle ambient gradient background accent -->
+                    <div class="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-[var(--brand-pink)]/10 blur-3xl pointer-events-none"></div>
+
+                    <h2 class="font-serif text-xl text-[var(--text-taupe)] mb-6 pb-4 border-b border-[var(--line-soft)]/20">
+                        Order Summary
+                    </h2>
+
+                    <!-- Price Calculations Table Structure -->
+                    <div class="space-y-4 text-sm font-medium text-[var(--text-taupe)]/80">
+                        <div class="flex justify-between">
+                            <span class="text-[var(--text-taupe)]/60">Subtotal ({{ totalItemsCount() }} items)</span>
+                            <span>{{ cartSubtotal() | currency }}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[var(--text-taupe)]/60">Estimated Shipping</span>
+                            <span class="text-[10px] tracking-widest font-bold uppercase px-2.5 py-1 rounded-full bg-[var(--brand-pink)]/10 text-[var(--brand-pink-dark)]">FREE</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-[var(--text-taupe)]/60">Estimated Tax</span>
+                            <span>{{ estimatedTax() | currency }}</span>
+                        </div>
+
+                        <!-- Divider Line with Magic Star Detail -->
+                        <div class="relative py-2 flex items-center justify-center">
+                            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--line-soft)]/60 to-transparent"></div>
+                            <span class="absolute text-[var(--brand-pink-dark)] bg-[var(--surface-white)] px-2 text-xs">✦</span>
+                        </div>
+
+                        <!-- Grand Total Line -->
+                        <div class="flex justify-between items-end pt-1">
+                            <span class="font-serif text-base text-[var(--text-taupe)]">Order Total</span>
+                            <span class="font-serif text-2xl text-[var(--brand-pink-dark)] leading-none">
+                                {{ orderTotal() | currency }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Button with Hover Elevation Effect -->
+                    <button (click)="proceedToCheckout()"
+                        class="w-full h-13 mt-8 bg-[var(--brand-pink-dark)] text-[var(--surface-white)] rounded-full flex items-center justify-center gap-3 font-semibold uppercase tracking-widest text-xs transition-all duration-400 ease-out hover:bg-[var(--text-taupe)] hover:shadow-[0_15px_30px_rgba(74,65,59,0.25)] hover:-translate-y-1 relative group overflow-hidden py-4">
+                        
+                        <!-- Floating shine sweep animation on hover -->
+                        <div class="absolute inset-0 w-1/2 h-full bg-[var(--surface-white)]/10 transform -skew-x-12 -translate-x-full group-hover:animate-shine"></div>
+                        
+                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        } @else {
+            <!-- Whimsical Empty State Layout -->
+            <div class="text-center py-20 bg-[var(--surface-white)] rounded-[2.5rem] shadow-[0_20px_60px_rgba(232,122,144,0.04)] border border-[var(--line-soft)]/30 max-w-2xl mx-auto px-6">
+                <div class="w-16 h-16 bg-[var(--brand-pink)]/10 text-[var(--brand-pink-dark)] rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                </div>
+                <h2 class="font-serif text-2xl text-[var(--brand-pink-dark)] mb-3">Your Cart is as Light as Pixie Dust</h2>
+                <p class="text-[var(--text-taupe)]/70 text-sm max-w-sm mx-auto mb-8 leading-relaxed">
+                    It looks like you haven’t added any precious pieces to your treasure box yet. Let’s find something magical!
+                </p>
+                <a routerLink="/products"
+                    class="inline-block px-8 py-3 bg.text-taupe bg-[var(--brand-pink-dark)] hover:bg-[var(--text-taupe)] text-[var(--surface-white)] rounded-full font-semibold uppercase tracking-widest text-xs shadow-md transition-all duration-300 hover:-translate-y-0.5">
+                    Explore Treasures
+                </a>
+            </div>
+        }
+    </div>
+</div>

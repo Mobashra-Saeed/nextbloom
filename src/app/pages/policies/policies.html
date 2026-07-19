@@ -1,0 +1,104 @@
+<div class="min-h-screen bg-gradient-to-b from-[var(--surface-white)] to-[var(--brand-pink)]/10 py-20 px-4 sm:px-6 lg:px-8 font-sans">
+    <div class="max-w-6xl mx-auto">
+
+        <!-- Magical Header -->
+        <div class="text-center mb-16">
+            <div class="inline-flex flex-col items-start">
+                <h1 class="font-serif text-3xl md:text-4xl flex items-center gap-3 relative">
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-pink-dark)] to-[var(--text-taupe)]">
+                        Fairy Promises
+                    </span>
+
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"
+                        class="w-7 h-7 mt-2 mr-2 text-[var(--brand-pink-dark)] overflow-visible cursor-pointer">
+                        <style>
+                            .pearl-drape {
+                                transform-origin: center top;
+                                animation: gentle-swing 4s ease-in-out infinite;
+                                filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 0.1));
+                                transition: all 0.4s ease;
+                            }
+
+                            svg:hover .pearl-drape {
+                                animation: gentle-swing-hover 2s ease-in-out infinite;
+                                filter: drop-shadow(0px 0px 8px currentColor);
+                            }
+
+                            @keyframes gentle-swing {
+
+                                0%,
+                                100% {
+                                    transform: rotate(-2deg) translateY(0px);
+                                }
+
+                                50% {
+                                    transform: rotate(2deg) translateY(-3px);
+                                }
+                            }
+
+                            @keyframes gentle-swing-hover {
+
+                                0%,
+                                100% {
+                                    transform: scale(1.05) rotate(-3deg) translateY(-2px);
+                                }
+
+                                50% {
+                                    transform: scale(1.05) rotate(3deg) translateY(-6px);
+                                }
+                            }
+                        </style>
+
+                        <g class="pearl-drape">
+                            <circle cx="12" cy="6" r="4.5" />
+                            <circle cx="17.7" cy="10.15" r="4.5" />
+                            <circle cx="15.5" cy="16.85" r="4.5" />
+                            <circle cx="8.5" cy="16.85" r="4.5" />
+                            <circle cx="6.3" cy="10.15" r="4.5" />
+                            <circle cx="12" cy="12" r="3" fill="var(--surface-white)" />
+                        </g>
+                    </svg>
+                </h1>
+                <div class="w-20 h-[1px] bg-gradient-to-r from-[var(--brand-pink)] to-transparent mt-2 mb-4"></div>
+            </div>
+            <p class="text-[var(--text-taupe)] text-sm md:text-base max-w-xl mx-auto font-medium">
+                Transparency, trust & handcrafted elegance.
+            </p>
+        </div>
+
+        <!-- Responsive Grid Layout (1 column mobile, 2 columns tablet, 3 columns desktop) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            @for (policy of policies; track policy.title) {
+            <div
+                class="group bg-[var(--surface-white)]/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-[0_15px_40px_rgba(232,122,144,0.15)] border border-[var(--brand-pink)]/35 hover:border-[var(--brand-pink)]/60 transition-all duration-500 hover:-translate-y-1 flex gap-5">
+
+                <!-- Icon Bubble -->
+                <div class="flex-shrink-0">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--brand-pink)]/35 to-[var(--brand-pink)]/15 flex items-center justify-center text-[var(--brand-pink-dark)] group-hover:scale-110 transition-transform duration-500">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="policy.iconPath" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="flex flex-col">
+                    <h3
+                        class="text-[15px] font-bold text-[var(--text-taupe)] mb-2 group-hover:text-[var(--brand-pink-dark)] transition-colors duration-300">
+                        {{ policy.title }}
+                    </h3>
+                    <p class="text-[13px] leading-relaxed text-[var(--text-taupe)]/80">
+                        {{ policy.description }}
+                    </p>
+                </div>
+
+            </div>
+            }
+
+        </div>
+
+    </div>
+</div>

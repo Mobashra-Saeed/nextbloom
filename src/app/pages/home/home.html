@@ -1,0 +1,172 @@
+<div class="relative w-full min-h-screen bg-[var(--bg-transparent)] select-none flex flex-col overflow-hidden">
+
+    <!-- Ambient Floating Magical Stars (Using your brand-pink variable) -->
+    <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <!-- Top Left Star -->
+        <svg class="absolute top-[8%] left-[12%] w-7 h-7 text-[var(--brand-pink)]/50 animate-pulse" fill="currentColor"
+            viewBox="0 0 24 24">
+            <path
+                d="M12 2C12 7.52 16.48 12 22 12C16.48 12 12 16.48 12 22C12 16.48 7.52 12 2 12C7.52 12 12 7.52 12 2Z" />
+        </svg>
+        <!-- Bottom Left Star -->
+        <svg class="absolute bottom-[15%] left-[20%] w-6 h-6 text-[var(--brand-pink-dark)]/40 animate-pulse delay-300"
+            fill="currentColor" viewBox="0 0 24 24">
+            <path
+                d="M12 2C12 7.52 16.48 12 22 12C16.48 12 12 16.48 12 22C12 16.48 7.52 12 2 12C7.52 12 12 7.52 12 2Z" />
+        </svg>
+        <!-- Bottom Right Star (near the slider) -->
+        <svg class="absolute bottom-[8%] right-[22%] w-5 h-5 text-[var(--brand-pink)]/60 animate-pulse delay-700"
+            fill="currentColor" viewBox="0 0 24 24">
+            <path
+                d="M12 2C12 7.52 16.48 12 22 12C16.48 12 12 16.48 12 22C12 16.48 7.52 12 2 12C7.52 12 12 7.52 12 2Z" />
+        </svg>
+    </div>
+
+    <!-- ================= 1. HERO TYPOGRAPHY SECTION ================= -->
+    <section class="relative z-10 w-full py-12 md:py-12 flex flex-col items-center justify-center text-center px-6">
+        <div class="max-w-3xl mx-auto flex flex-col items-center relative">
+
+            <!-- Magical Overline Text -->
+            <div class="flex items-center gap-3 opacity-0 animate-fade-in-up">
+                <div class="w-8 h-[1px] bg-[var(--brand-pink)]"></div>
+                <span class="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[var(--text-taupe)]/90 font-medium">
+                    We Craft Details That Inspire
+                </span>
+                <div class="w-8 h-[1px] bg-[var(--brand-pink)] hidden md:block"></div>
+            </div>
+
+            <!-- Dreamy Gradient Main Title -->
+            <div class="relative">
+                <!-- Tiny floating star left of title -->
+                <svg class="absolute -top-4 -left-6 w-4 h-4 text-[var(--brand-pink-dark)]/70 animate-bounce delay-150 pointer-events-none hidden md:block"
+                    fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C12 7.52 16.48 12 22 12C16.48 12 12 16.48 12 22C12 16.48 7.52 12 2 12C7.52 12 12 7.52 12 2Z" />
+                </svg>
+
+                <h2
+                    class="font-serif flex flex-col md:flex-row items-center justify-center gap-4 text-5xl md:text-5xl lg:text-[4rem] drop-shadow-sm tracking-wide leading-[1.2]  opacity-0 animate-fade-in-up delay-100">
+
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-pink-dark)] to-[var(--text-taupe)] text-center px-2">
+                        Timeless <br class="md:hidden"> Accessories
+                    </span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"
+                            class="w-6 h-6 md:w-12 md:h-12 text-[var(--brand-pink-dark)] flex-shrink-0 overflow-visible cursor-pointer relative z-10">
+
+                            <!-- Self-contained animation styles -->
+                            <style>
+                                .pearl-drape {
+                                    transform-origin: center top;
+                                    animation: gentle-swing 4s ease-in-out infinite;
+                                    filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 0.1));
+                                    transition: all 0.4s ease;
+                                }
+
+                                svg:hover .pearl-drape {
+                                    animation: gentle-swing-hover 2s ease-in-out infinite;
+                                    filter: drop-shadow(0px 0px 10px currentColor);
+                                }
+
+                                @keyframes gentle-swing {
+
+                                    0%,
+                                    100% {
+                                        transform: rotate(-2deg) translateY(0px);
+                                    }
+
+                                    50% {
+                                        transform: rotate(2deg) translateY(-3px);
+                                    }
+                                }
+
+                                @keyframes gentle-swing-hover {
+
+                                    0%,
+                                    100% {
+                                        transform: scale(1.05) rotate(-3deg) translateY(-2px);
+                                    }
+
+                                    50% {
+                                        transform: scale(1.05) rotate(3deg) translateY(-6px);
+                                    }
+                                }
+                            </style>
+
+                            <g class="pearl-drape">
+                                <circle cx="1.5" cy="6" r="2.8" />
+                                <circle cx="22.5" cy="6" r="2.8" />
+                                <circle cx="3" cy="11.5" r="3.0" />
+                                <circle cx="21" cy="11.5" r="3.0" />
+                                <circle cx="6.8" cy="16.5" r="3.2" />
+                                <circle cx="17.2" cy="16.5" r="3.2" />
+                                <circle cx="12" cy="19" r="3.5" />
+                            </g>
+                        </svg>
+                </h2>
+
+                <!-- Tiny floating star right of title -->
+                <svg class="absolute -bottom-2 -right-8 w-5 h-5 text-[var(--brand-pink-dark)]/60 animate-pulse delay-300 pointer-events-none hidden md:block"
+                    fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C12 7.52 16.48 12 22 12C16.48 12 12 16.48 12 22C12 16.48 7.52 12 2 12C7.52 12 12 7.52 12 2Z" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 3. IMAGE SLIDER & ACTIONS SECTION ================= -->
+    <section
+        class="relative z-10 w-[95%] max-w-6xl mx-auto h-[52vh] sm:h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden bg-[var(--bg-slider)] opacity-0 animate-fade-in-up delay-300 rounded-2xl md:rounded-[1.5rem] shadow-[0_20px_50px_-10px_rgba(232,122,144,0.3)] border-[3px] border-[var(--surface-white)]/60 mb-12">
+
+        <!-- Layer 1: Image Slider -->
+        @for (img of sliderImages; track img; let idx = $index) {
+        <div class="absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out"
+            [class.opacity-100]="idx === currentIndex" [class.opacity-0]="idx !== currentIndex">
+            <img [src]="img" alt="Nextbloom Collection" class="w-full h-full object-cover object-center">
+        </div>
+        }
+
+        <!-- Layer 2: Soft Readability Overlay -->
+        <div class="absolute inset-0 bg-[var(--text-taupe)]/20 z-10 pointer-events-none"></div>
+
+        <!-- Layer 3: Overlay Buttons using your exact color variables -->
+        <div
+            class="relative z-20 flex flex-col sm:flex-row items-center justify-center gap-5 px-6 w-full mt-auto mb-20 md:mb-24">
+
+            <!-- Solid Button with Right Icon -->
+            <button
+                class="flex items-center justify-center gap-2.5 bg-[var(--brand-pink-dark)] text-[var(--surface-white)] border border-[var(--brand-pink-dark)] font-semibold text-xs md:text-sm uppercase tracking-wider px-7 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_25px_rgba(232,122,144,0.5)] cursor-pointer">
+                Shop Collection
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
+                </svg>
+            </button>
+
+            <!-- Outlined Button with Left Icon -->
+            <button
+                class="flex items-center justify-center gap-2.5 bg-[var(--surface-white)]/20 backdrop-blur-md text-[var(--surface-white)] border border-[var(--surface-white)]/70 font-semibold text-xs md:text-sm uppercase tracking-wider px-7 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--surface-white)]/30 hover:shadow-[0_15px_25px_rgba(255,255,255,0.2)] cursor-pointer">
+                Custom Orders
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                </svg>
+            </button>
+
+        </div>
+
+        <!-- Layer 4: Magical Slider Dots -->
+        <div
+            class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex justify-center items-center gap-3 bg-[var(--text-taupe)]/15 backdrop-blur-md px-6 py-3 rounded-full border border-[var(--surface-white)]/20 shadow-lg">
+            @for (img of sliderImages; track img; let idx = $index) {
+            <button (click)='setSlide(idx)' title="Go to slide"
+                class="h-2 rounded-full transition-all duration-500 cursor-pointer shadow-sm hover:scale-110"
+                [style.width]="idx === currentIndex ? '2rem' : '0.5rem'"
+                [style.backgroundColor]="idx === currentIndex ? 'var(--surface-white)' : 'rgba(255, 255, 255, 0.6)'">
+            </button>
+            }
+        </div>
+    </section>
+
+</div>

@@ -1,0 +1,106 @@
+<section class="w-full py-20 bg-[var(--bg-transparent)] select-none">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+
+        <!-- Section Title with Sparkle -->
+        <div class="flex flex-col items-center justify-center text-center mb-16">
+            <div class="inline-flex flex-col items-start">
+            <h2 class="font-serif text-3xl md:text-4xl flex items-center gap-3 py-1">
+
+                <!-- The gradient is applied to this span to protect the SVG -->
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-pink-dark)] to-[var(--text-taupe)]">
+                    Shop By Category
+                </span>
+                <!-- Cute Daisy SVG with gentle swing animation -->
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"
+                    class="w-7 h-7 mt-2 mr-2 text-[var(--brand-pink-dark)] overflow-visible cursor-pointer">
+
+                    <!-- Self-contained animation styles -->
+                    <style>
+                        .pearl-drape {
+                            transform-origin: center top;
+                            animation: gentle-swing 4s ease-in-out infinite;
+                            filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 0.1));
+                            transition: all 0.4s ease;
+                        }
+
+                        svg:hover .pearl-drape {
+                            animation: gentle-swing-hover 2s ease-in-out infinite;
+                            filter: drop-shadow(0px 0px 8px currentColor);
+                        }
+
+                        @keyframes gentle-swing {
+
+                            0%,
+                            100% {
+                                transform: rotate(-2deg) translateY(0px);
+                            }
+
+                            50% {
+                                transform: rotate(2deg) translateY(-3px);
+                            }
+                        }
+
+                        @keyframes gentle-swing-hover {
+
+                            0%,
+                            100% {
+                                transform: scale(1.05) rotate(-3deg) translateY(-2px);
+                            }
+
+                            50% {
+                                transform: scale(1.05) rotate(3deg) translateY(-6px);
+                            }
+                        }
+                    </style>
+
+                    <!-- Wrapped the cute daisy in the animated group -->
+                    <g class="pearl-drape">
+                        <!-- 5 Plump Petals -->
+                        <circle cx="12" cy="6" r="4.5" />
+                        <circle cx="17.7" cy="10.15" r="4.5" />
+                        <circle cx="15.5" cy="16.85" r="4.5" />
+                        <circle cx="8.5" cy="16.85" r="4.5" />
+                        <circle cx="6.3" cy="10.15" r="4.5" />
+
+                        <!-- Center Cutout (uses your background variable to look hollow/aesthetic!) -->
+                        <circle cx="12" cy="12" r="3" fill="var(--bg-light)" />
+                    </g>
+                </svg>
+            </h2>
+            <div class="w-24 h-[2px] bg-gradient-to-r from-[var(--brand-pink)] to-transparent mt-2"></div>
+            </div>
+        </div>
+
+        <!-- Categories Grid -->
+        <div
+            class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-12 justify-items-center">
+
+            @for (category of categoryList; track category.name) {
+            <a href="#" (click)="onCategoryClick($event, category.name)"
+                class="group flex flex-col items-center cursor-pointer w-full max-w-[140px] md:max-w-[160px]"
+                [attr.aria-label]="'Shop ' + category.name" [title]="category.name">
+                <div
+                    class="relative w-28 h-28 md:w-36 md:h-36 rounded-full border-[2px] p-[0px] bg-gradient-to-tr from-[var(--brand-pink)]/30 to-[var(--bg-light)] animate-breathing-glow transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:bg-[var(--brand-pink)]/40 group-hover:shadow-[0_0_30px_rgba(232,122,144,0.8)]! group-hover:border-[var(--brand-pink-dark)]!">
+
+                    <!-- Inner Image Container with a subtle inner white border to separate it from the pink -->
+                    <div class="w-full h-full rounded-full overflow-hidden shadow-inner relative">
+                        <img [src]="category.path" [alt]="category.name" title="{{ category.name }}"
+                            class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.1]"
+                            loading="lazy">
+                    </div>
+
+                </div>
+                <div class="mt-6 h-10 flex items-start justify-center">
+                    <span
+                        class="text-[11px] md:text-xs font-bold tracking-[0.15em] text-[var(--text-taupe)] uppercase text-center transition-colors duration-300 group-hover:text-[var(--brand-pink-dark)] px-2 leading-snug animate-float-text group-hover:animate-twist origin-center">
+                        {{ category.name }}
+                    </span>
+                </div>
+
+            </a>
+            }
+
+        </div>
+    </div>
+</section>

@@ -1,3 +1,108 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
-@import 'tailwindcss';
+:root {
+    /* Fonts */
+    --font-serif: "Playfair Display", Georgia, serif;
+    --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+    --bg-light: #FFFDFD;
+    --bg-transparent: transparent;
+    --bg-slider: #ECE6E2;
+    --text-taupe: #5E534C;
+    --brand-pink: #F5A6B8;
+    --brand-pink-dark: #E87A90;
+    --surface-white: #FFFFFF;
+    --line-soft: #E0D0C1;
+    --badge-new: #D4A373;
+    --badge-sale: #F87171;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.delay-100 {
+    animation-delay: 100ms;
+}
+
+.delay-200 {
+    animation-delay: 200ms;
+}
+
+.delay-300 {
+    animation-delay: 300ms;
+}
+
+@keyframes breathingGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(245, 166, 184, 0.3);
+        border-color: rgba(245, 166, 184, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 18px rgba(245, 166, 184, 0.6);
+        border-color: rgba(232, 122, 144, 0.8);
+    }
+}
+
+.animate-breathing-glow {
+    animation: breathingGlow 3s ease-in-out infinite;
+}
+
+/* 2. Continuous smooth floating for the text */
+@keyframes floatText {
+
+    0%,
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-4px) scale(1.02);
+    }
+}
+
+.animate-float-text {
+    display: inline-block;
+    animation: floatText 3.5s ease-in-out infinite;
+}
+
+/* Clean, Premium, Straight Lift (No tilt, no glow) */
+@keyframes elegantLiftHover {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        /* Just a soft, straight lift and a subtle zoom */
+        transform: translateY(-4px) scale(1.08);
+    }
+}
+
+/* Make sure this targets the same class you have on your text */
+.group:hover .group-hover\:animate-twist {
+    /* Sped up slightly to 0.4s since it's a simpler, more direct movement */
+    animation: elegantLiftHover 0.4s ease-out forwards !important;
+}
+
+/* Global body styling to use our theme */
+body {
+    font-family: var(--font-sans);
+    color: var(--text-taupe);
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+}
