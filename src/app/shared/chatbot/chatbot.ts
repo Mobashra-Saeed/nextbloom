@@ -1,4 +1,4 @@
-import { Component, signal, ViewChild, ElementRef, AfterViewChecked, inject } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,6 @@ interface BotResponseConfig {
   action?: string;
 }
 
-// Our Advanced, Business-Specific Serverless Brain
 const BOT_RESPONSES: Record<string, BotResponseConfig> = {
   'hello': {
     reply: 'Welcome to NextBloom! ✨ I am your fairy guide. Are you looking for custom beaded jewelry today?',
@@ -64,7 +63,7 @@ const BOT_RESPONSES: Record<string, BotResponseConfig> = {
   },
   'Explore Web Shop': {
     reply: 'Transporting you to our digital treasure box...',
-    nextOptions: ['Main Menu'], // <-- We added 'Main Menu' back here!
+    nextOptions: ['Main Menu'],
     action: 'NAVIGATE_PRODUCTS'
   },
   'Main Menu': {
@@ -80,7 +79,7 @@ const BOT_RESPONSES: Record<string, BotResponseConfig> = {
   templateUrl: './chatbot.html',
   styleUrl: './chatbot.css',
 })
-export class ChatbotComponent implements AfterViewChecked {
+export class ChatbotComponent {
   private router = inject(Router);
   @ViewChild('chatScroll') private chatScrollContainer!: ElementRef;
 
@@ -93,12 +92,25 @@ export class ChatbotComponent implements AfterViewChecked {
 
   currentOptions = signal<string[]>(BOT_RESPONSES['hello'].nextOptions);
 
-  // Updated Bead & Crystal inventory for the UI preview
   crystalData = [
     { name: 'Soft Rose & Pearl', color: 'bg-[var(--brand-pink)]/40 border-[var(--brand-pink)]/60', energy: 'Perfect for Romantic Gajray & Bracelets' },
     { name: 'Midnight Onyx', color: 'bg-[var(--text-taupe)] border-[var(--text-taupe)] text-[var(--surface-white)]', energy: 'Ideal for Protective Anklets & Counters' },
     { name: 'Ocean Glass', color: 'bg-[var(--bg-slider)] border-[var(--bg-slider)]/70', energy: 'Dreamy Vibes for Phone Charms & Pendants' }
   ];
+
+  constructor() {
+    // Elegant Signal Watcher: Automatically fires ONLY when new messages arrive or typing status changes
+    effect(() => {
+      this.messages();
+      this.isTyping();
+      this.isOpen();
+
+      // A micro-delay allows Angular to draw the bubble template layout before we scroll
+      setTimeout(() => {
+        this.scrollToBottom();
+      }, 50);
+    });
+  }
 
   toggleChat(): void {
     this.isOpen.update(v => !v);
@@ -131,13 +143,9 @@ export class ChatbotComponent implements AfterViewChecked {
     }, 900);
   }
 
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-  }
-
   private scrollToBottom(): void {
-    try {
+    if (this.chatScrollContainer?.nativeElement) {
       this.chatScrollContainer.nativeElement.scrollTop = this.chatScrollContainer.nativeElement.scrollHeight;
-    } catch (err) { }
+    }
   }
 }

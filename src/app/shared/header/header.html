@@ -1,14 +1,9 @@
 <div class="w-full bg-[var(--bg-light)] select-none flex flex-col">
 
     <!-- ================= 1. PREMIUM BOUTIQUE HEADER (NOW STICKY) ================= -->
-    <!-- Added 'sticky top-0' and bumped z-40 to z-50 -->
     <header
         class="fixed top-0 left-0 right-0 w-full bg-[var(--bg-light)] text-[var(--text-taupe)] flex flex-col z-50 border-b border-[var(--line-soft)]/40 shadow-[0_4px_15px_-3px_rgba(0,0,0,0.12)]">
-
-        <!-- Pure Left/Right flex layout using justify-between -->
         <div class="w-full max-w-7xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
-
-            <!-- Left: Brand Identity (Image Logo + Text Logo) -->
             <div class="flex items-center gap-1" routerLink="/products">
                 <img src="./assets/images/logo.jpeg" alt="Nextbloom"
                     class="w-16 h-16 md:w-14 md:h-14 object-contain mix-blend-multiply cursor-pointer">
@@ -17,10 +12,8 @@
                     Next<span class="text-[var(--brand-pink-dark)] font-medium pl-1 italic">bloom</span>
                 </h1>
             </div>
-
             <!-- Right: Contact & User Actions grouped together -->
             <div class="flex items-center gap-4 md:gap-4 text-[var(--text-taupe)]/80">
-
                 <!-- Phone Icon -->
                 <a href="https://wa.me/923486527505" target="_blank" rel="noopener noreferrer"
                     class="flex items-center justify-center p-1 transition-colors duration-300 hover:text-[var(--brand-pink-dark)] cursor-pointer group"
@@ -32,7 +25,6 @@
                             d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
                     </svg>
                 </a>
-
                 <!-- WishList (Heart) -->
                 <button
                     class="flex items-center justify-center p-1 transition-colors duration-300 hover:text-[var(--brand-pink-dark)] cursor-pointer hidden sm:flex relative group"
@@ -47,7 +39,6 @@
                         {{ store.wishlistItemsCount() }}
                     </span>
                 </button>
-
                 <!-- Cart -->
                 <button
                     class="flex items-center justify-center p-1 transition-colors duration-300 hover:text-[var(--brand-pink-dark)] cursor-pointer relative group"
@@ -64,6 +55,5 @@
                 </button>
             </div>
         </div>
-
     </header>
 </div>
