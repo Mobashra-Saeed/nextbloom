@@ -24,6 +24,6 @@ export class WishlistComponent {
   }
 
   wishlistDescription(item: Product): string {
-    return `A handcrafted ${item.category.toLowerCase()} piece curated for your wishlist.`;
+    return `A handcrafted Rs{item.category.toLowerCase()} piece curated for your wishlist.`;
   }
 }

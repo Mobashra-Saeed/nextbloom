@@ -3,17 +3,17 @@
     <!-- ================= 1. PREMIUM BOUTIQUE HEADER (NOW STICKY) ================= -->
     <header
         class="fixed top-0 left-0 right-0 w-full bg-[var(--bg-light)] text-[var(--text-taupe)] flex flex-col z-50 border-b border-[var(--line-soft)]/40 shadow-[0_4px_15px_-3px_rgba(0,0,0,0.12)]">
-        <div class="w-full max-w-7xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-1" routerLink="/products">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 h-20 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-1 min-w-0" routerLink="/products">
                 <img src="./assets/images/logo.jpeg" alt="Nextbloom"
-                    class="w-16 h-16 md:w-14 md:h-14 object-contain mix-blend-multiply cursor-pointer">
+                    class="w-14 h-14 sm:w-16 sm:h-16 md:w-14 md:h-14 object-contain mix-blend-multiply cursor-pointer shrink-0">
                 <h1
-                    class="font-serif text-xl md:text-2xl tracking-[0.15em] uppercase font-light text-[var(--text-taupe)] mt-1 cursor-pointer">
+                    class="hidden sm:block font-serif text-lg md:text-2xl tracking-[0.12em] md:tracking-[0.15em] uppercase font-light text-[var(--text-taupe)] mt-1 cursor-pointer whitespace-nowrap">
                     Next<span class="text-[var(--brand-pink-dark)] font-medium pl-1 italic">bloom</span>
                 </h1>
             </div>
             <!-- Right: Contact & User Actions grouped together -->
-            <div class="flex items-center gap-4 md:gap-4 text-[var(--text-taupe)]/80">
+            <div class="flex items-center gap-2 sm:gap-3 md:gap-4 text-[var(--text-taupe)]/80 shrink-0">
                 <!-- Phone Icon -->
                 <a href="https://wa.me/923486527505" target="_blank" rel="noopener noreferrer"
                     class="flex items-center justify-center p-1 transition-colors duration-300 hover:text-[var(--brand-pink-dark)] cursor-pointer group"
@@ -27,7 +27,7 @@
                 </a>
                 <!-- WishList (Heart) -->
                 <button
-                    class="flex items-center justify-center p-1 transition-colors duration-300 hover:text-[var(--brand-pink-dark)] cursor-pointer hidden sm:flex relative group"
+                    class="flex items-center justify-center p-1 transition-colors duration-300 hover:text-[var(--brand-pink-dark)] cursor-pointer relative group"
                     title="WishList" [routerLink]="['/wishlist']">
                     <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                         class="w-6 h-6 transition-all duration-300 group-hover:fill-[var(--brand-pink-dark)]/10">
