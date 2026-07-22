@@ -132,13 +132,17 @@ export class ChatbotComponent {
 
       this.isTyping.set(false);
 
+      this.currentOptions.set(response.nextOptions);
+
       if (response.action === 'NAVIGATE_PRODUCTS') {
         setTimeout(() => {
           this.router.navigate(['/products']);
-          this.isOpen.set(false);
+          this.messages.update(msgs => [...msgs, {
+            sender: 'bot',
+            text: 'You\'ve arrived! ✨ You\'re now browsing our Web Shop. Let me know if you need anything else!',
+            type: 'text'
+          }]);
         }, 1200);
-      } else {
-        this.currentOptions.set(response.nextOptions);
       }
     }, 900);
   }

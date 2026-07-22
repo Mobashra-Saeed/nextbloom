@@ -51,7 +51,7 @@ export class CheckoutComponent implements OnInit {
     // 2. Format the Cart Items into a neat list
     let itemsText = '';
     this.cartItems().forEach(item => {
-      itemsText += `🌸 Rs{item.quantity}x Rs{item.name} - Rs. Rs{item.price * item.quantity}\n`;
+      itemsText += `🌸 ${item.quantity}x ${item.name} - Rs. ${item.price * item.quantity}\n`;
     });
 
     // 3. Construct the magical WhatsApp message
@@ -59,24 +59,24 @@ export class CheckoutComponent implements OnInit {
 ✨ *NEW NEXTBLOOM ORDER* ✨
 
 *Customer Details:*
-👤 Name: Rs{this.customer.name}
-📱 Phone: Rs{this.customer.phone}
-🏙️ City: Rs{this.customer.city}
-🏡 Address: Rs{this.customer.address}
-📝 Notes: Rs{this.customer.notes || 'None'}
+👤 Name: ${this.customer.name}
+📱 Phone: ${this.customer.phone}
+🏙️ City: ${this.customer.city}
+🏡 Address: ${this.customer.address}
+📝 Notes: ${this.customer.notes || 'None'}
 
 *Treasure Box (Cart):*
-Rs{itemsText}
-*Subtotal:* Rs. Rs{this.subtotal()}
-*Delivery:* Rs. Rs{this.deliveryCharges}
-*Grand Total: Rs. Rs{this.grandTotal()}*
+${itemsText}
+*Subtotal:* Rs. ${this.subtotal()}
+*Delivery:* Rs. ${this.deliveryCharges}
+*Grand Total: Rs. ${this.grandTotal()}*
 
 Thank you! I am ready to confirm my order. 💖`;
 
     // 4. Encode the text and send to your specific WhatsApp number
     const encodedMessage = encodeURIComponent(message);
     const whatsappNumber = '923486527505'; // Your business number
-    const whatsappUrl = `https://wa.me/Rs{whatsappNumber}?text=Rs{encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
     // 5. Open WhatsApp in a new tab
     window.open(whatsappUrl, '_blank');

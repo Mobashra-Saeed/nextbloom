@@ -89,18 +89,18 @@
 
             <!-- Left Side: Magical Image Display (Reduced heavy padding to save height) -->
             <div
-                class="w-full md:w-1/2 p-8 md:p-10 flex items-center justify-center bg-gradient-to-br from-white to-[var(--bg-slider)]/60 relative group">
+                class="w-full md:w-1/2 p-4 sm:p-6 md:p-10 flex items-center justify-center bg-gradient-to-br from-white to-[var(--bg-slider)]/60 relative group min-h-[300px] sm:min-h-[400px] md:min-h-auto">
                 <div class="absolute top-10 left-10 opacity-20 text-[var(--brand-pink-dark)]">
                     <svg class="w-8 h-8 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5L12 0z" />
                     </svg>
                 </div>
                 <img [src]="product()?.imageURL" [alt]="product()?.name" title="Product image"
-                    class="w-full max-w-xs lg:max-w-sm rounded-2xl shadow-lg transition-transform duration-700 ease-out group-hover:scale-105 group-hover:shadow-[0_20px_50px_rgba(232,122,144,0.2)] relative z-10">
+                    class="w-full h-auto max-w-xs sm:max-w-sm lg:max-w-sm rounded-2xl shadow-lg transition-transform duration-700 ease-out group-hover:scale-105 group-hover:shadow-[0_20px_50px_rgba(232,122,144,0.2)] relative z-10">
             </div>
 
             <!-- Right Side: Elegant Product Details (Reduced padding and bottom margins) -->
-            <div class="w-full md:w-1/2 p-6 md:p-10 lg:p-12 flex flex-col justify-center bg-[var(--surface-white)]">
+            <div class="w-full md:w-1/2 p-4 sm:p-6 md:p-10 lg:p-12 flex flex-col justify-center bg-[var(--surface-white)] overflow-x-hidden">
 
                 <!-- Dynamic Category Badge (mb-6 to mb-4) -->
                 <span
@@ -109,7 +109,7 @@
                 </span>
 
                 <!-- Dynamic Name (mb-4 to mb-2, adjusted text-5xl to text-4xl to prevent tall wrapping) -->
-                <h1 class="font-serif text-4xl md:text-5xl lg:text-4xl text-[var(--text-taupe)] mb-2 leading-tight">
+                <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-4xl text-[var(--text-taupe)] mb-2 leading-tight">
                     {{ product()?.name }}
                 </h1>
 
@@ -141,19 +141,19 @@
                 </div>
 
                 <!-- Dynamic Description (mb-8 to mb-5) -->
-                <p class="text-[var(--text-taupe)]/90 leading-relaxed mb-5 text-sm md:text-base font-medium">
+                <p class="text-[var(--text-taupe)]/90 leading-relaxed mb-5 text-xs sm:text-sm md:text-base font-medium word-break break-words">
                     This stunning and delicate accessory can be Customized to your liking, making it a truly unique and
                     personal piece.
                 </p>
 
                 <!-- Dynamic Price (mb-10 to mb-6) -->
-                <div class="flex items-end gap-4 mb-6">
-                    <span class="text-4xl font-serif text-[var(--brand-pink-dark)] leading-none">
-                        {{ product()?.price | currency }}
+                <div class="flex items-end gap-4 mb-6 flex-wrap">
+                    <span class="text-3xl sm:text-4xl text-[var(--brand-pink-dark)] leading-none">
+                        Rs {{ product()?.price }}
                     </span>
                     @if (product()?.originalPrice) {
                     <span class="text-lg text-[var(--text-taupe)]/40 line-through mb-1">
-                        {{ product()?.originalPrice | currency }}
+                        Rs {{ product()?.originalPrice }}
                     </span>
                     }
                 </div>

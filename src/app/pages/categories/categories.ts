@@ -29,11 +29,15 @@ export class CategoriesComponent {
     // ... rest of your categories
   ];
 
-  // 2. Create a method to handle the click
   onCategoryClick(event: Event, categoryName: string) {
     event.preventDefault(); // Prevents the page from jumping if you use <a href="#">
     
     // Tell the store to update the selected category!
     this.store.setCategory(categoryName);
+
+    // Scroll the user down so they can see the updated products
+    setTimeout(() => {
+      document.getElementById('our-creations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   }
 }

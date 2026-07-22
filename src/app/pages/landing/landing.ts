@@ -7,6 +7,7 @@ import { Footer } from '../../shared/footer/footer';
 import { ChatbotComponent } from '../../shared/chatbot/chatbot';
 import { PoliciesComponent } from '../policies/policies';
 
+
 @Component({
   selector: 'app-landing',
   standalone: true,

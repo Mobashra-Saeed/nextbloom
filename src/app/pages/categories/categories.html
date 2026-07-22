@@ -74,14 +74,14 @@
 
         <!-- Categories Grid -->
         <div
-            class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-12 justify-items-center">
+            class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 sm:gap-x-4 md:gap-x-6 gap-y-6 sm:gap-y-8 md:gap-y-12 justify-items-center">
 
             @for (category of categoryList; track category.name) {
             <a href="#" (click)="onCategoryClick($event, category.name)"
-                class="group flex flex-col items-center cursor-pointer w-full max-w-[140px] md:max-w-[160px]"
+                class="group flex flex-col items-center cursor-pointer w-full max-w-[110px] sm:max-w-[140px] md:max-w-[160px]"
                 [attr.aria-label]="'Shop ' + category.name" [title]="category.name">
                 <div
-                    class="relative w-28 h-28 md:w-36 md:h-36 rounded-full border-[2px] p-[0px] bg-gradient-to-tr from-[var(--brand-pink)]/30 to-[var(--bg-light)] animate-breathing-glow transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:bg-[var(--brand-pink)]/40 group-hover:shadow-[0_0_30px_rgba(232,122,144,0.8)]! group-hover:border-[var(--brand-pink-dark)]!">
+                    class="relative w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full border-[2px] p-[0px] bg-gradient-to-tr from-[var(--brand-pink)]/30 to-[var(--bg-light)] animate-breathing-glow transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:bg-[var(--brand-pink)]/40 group-hover:shadow-[0_0_30px_rgba(232,122,144,0.8)]! group-hover:border-[var(--brand-pink-dark)]!">
 
                     <!-- Inner Image Container with a subtle inner white border to separate it from the pink -->
                     <div class="w-full h-full rounded-full overflow-hidden shadow-inner relative">
@@ -91,9 +91,9 @@
                     </div>
 
                 </div>
-                <div class="mt-6 h-10 flex items-start justify-center">
+                <div class="mt-3 sm:mt-6 h-8 sm:h-10 flex items-start justify-center">
                     <span
-                        class="text-[11px] md:text-xs font-bold tracking-[0.15em] text-[var(--text-taupe)] uppercase text-center transition-colors duration-300 group-hover:text-[var(--brand-pink-dark)] px-2 leading-snug animate-float-text group-hover:animate-twist origin-center">
+                        class="text-[9px] sm:text-[11px] md:text-xs font-bold tracking-[0.15em] text-[var(--text-taupe)] uppercase text-center transition-colors duration-300 group-hover:text-[var(--brand-pink-dark)] px-1 sm:px-2 leading-snug animate-float-text group-hover:animate-twist origin-center">
                         {{ category.name }}
                     </span>
                 </div>
