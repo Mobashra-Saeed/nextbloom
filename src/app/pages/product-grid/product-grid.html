@@ -102,8 +102,8 @@
                 </svg>
 
                 <!-- Image Wrapper (Clean and Uncut) -->
-                <a [routerLink]="['/product', product.id]" class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-[var(--bg-slider)] cursor-pointer block z-10">
-                    <img [src]="product.imageURL" [alt]="product.name" title="Product image" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+                <a [routerLink]="['/product', product.id]" class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-[var(--surface-white)] cursor-pointer block z-10 p-2">
+                    <img [src]="product.imageURL" [alt]="product.name" title="Product image" class="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105">
 
                     <div class="absolute inset-0 bg-[var(--text-taupe)]/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
