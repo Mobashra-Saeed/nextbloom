@@ -14,19 +14,16 @@ export class CategoriesComponent {
   // 1. Inject the store we just created
   readonly store = inject(EcommerceStore);
 
-  // Your existing category list
+  // Unified bracelet category for all bracelet-related products
   categoryList = [
     { name: 'All', path: 'assets/images/slider1.jpg' },
-    { name: 'pinterest Name Bracelets', path: 'assets/images/categories/pinterest_name_bracelets.jpg' },
-    { name: 'Simple Bracelets', path: 'assets/images/categories/simple_bracelets.jpg' },
-    { name: 'Stack Bracelets', path: 'assets/images/categories/stack.jpg' },
-    { name: 'Simple Name Bracelets', path: 'assets/images/categories/simple_name_bracelets.jpg' },
+    { name: 'Beaded Bracelets', path: 'assets/images/categories/simple_bracelets.jpg' },
+    { name: 'Pendants', path: '/assets/images/products/tom_and__jerry_pendant.jpg' },
+    { name: 'Tasbih', path: 'assets/images/categories/simple_bracelets.jpg' },
     { name: 'Anklets', path: 'assets/images/categories/anklets.jpg' },
     { name: 'Gajry', path: 'assets/images/categories/gajry.jpg' },
     { name: 'Phone Charms', path: 'assets/images/categories/phone_charms.jpg' },
     { name: 'Earrings', path: 'assets/images/categories/earrings.jpg' },
-    { name: 'Pair Bracelets', path: 'assets/images/categories/pair_bracelets.jpg' },
-    // ... rest of your categories
   ];
 
   onCategoryClick(event: Event, categoryName: string) {
