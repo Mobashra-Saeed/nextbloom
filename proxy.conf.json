@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://localhost:3000",
+    "target": "'https://nextbloom-backend.vercel.app/api/chat'",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
