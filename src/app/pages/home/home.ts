@@ -10,6 +10,7 @@ export class Home implements OnInit, OnDestroy {
   sliderImages: string[] = [
     'assets/images/slider2.jpg',
     'assets/images/slider3.jpg',
+
   ];
 
   currentIndex: number = 0;
@@ -48,4 +49,11 @@ export class Home implements OnInit, OnDestroy {
     this.cdr.detectChanges(); // Force update when a user clicks a dot
     this.startAutoSlide(); // Restart the timer so it doesn't instantly jump to the next one
   }
+  scrollToShop() {
+    const shopSection = document.getElementById('shop-section');
+    if (shopSection) {
+        // This makes the browser smoothly glide down to the products!
+        shopSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
 }

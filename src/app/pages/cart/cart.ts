@@ -26,9 +26,12 @@ export class CartComponent {
   estimatedTax = computed(() => 
     this.cartSubtotal() * 0.05 // A softer 5% luxury fairy tax
   );
+  estimatedShipping = computed(() =>
+    this.cartSubtotal() > 0 ? 350 : 350 // 350 Rs shipping fee for the magical delivery
+  );
 
   orderTotal = computed(() => 
-    this.cartSubtotal() + this.estimatedTax()
+    this.cartSubtotal() + this.estimatedShipping()
   );
 
   // Cart Actions

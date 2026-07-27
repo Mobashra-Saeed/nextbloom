@@ -14,4 +14,7 @@ import { PoliciesComponent } from '../policies/policies';
   imports: [Header, Home, CategoriesComponent, ProductGridComponent, Footer, ChatbotComponent, PoliciesComponent],
   templateUrl: './landing.html'
 })
-export class LandingComponent {}
+export class LandingComponent {
+
+  
+}

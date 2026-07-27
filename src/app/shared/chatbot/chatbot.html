@@ -1,4 +1,3 @@
-
 <!-- Chat Widget Container -->
 <div class="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
 
@@ -130,15 +129,21 @@
         }
     </div>
 
-    <!-- Interactive Quick Replies (The Footer) -->
-    <div class="p-4 bg-[var(--surface-white)]/50 border-t border-[var(--brand-pink)]/20 min-h-[5rem]">
-        <div class="flex flex-wrap gap-2 justify-end">
-            @for (option of currentOptions(); track option) {
-            <button (click)="handleOptionClick(option)"
-                class="px-4 py-2 bg-[var(--surface-white)] border border-[var(--brand-pink-dark)]/30 hover:bg-[var(--brand-pink-dark)] text-[var(--brand-pink-dark)] hover:text-[var(--surface-white)] transition-colors duration-300 rounded-full text-xs font-bold tracking-wide shadow-sm hover:shadow-md">
-                {{ option }}
+    <!-- Interactive Input (The Footer) -->
+    <div class="p-4 bg-[var(--surface-white)]/50 border-t border-[var(--brand-pink)]/20">
+
+        <!-- Text Input Field for AI Chat -->
+        <div class="flex gap-2 relative">
+            <input type="text" [(ngModel)]="userInput" (keyup.enter)="sendMessage()"
+                placeholder="Ask about NextBloom..."
+                class="w-full pl-4 pr-10 py-2.5 rounded-full border border-[var(--brand-pink)]/30 bg-[var(--surface-white)] text-sm focus:outline-none focus:border-[var(--brand-pink-dark)] shadow-inner text-[var(--text-taupe)] transition-all">
+
+            <button type="button" (click)="sendMessage()" aria-label="Send message" title="Send message"
+                class="absolute right-1 top-1 bottom-1 w-8 h-8 flex items-center justify-center rounded-full bg-[var(--brand-pink-dark)] text-white hover:scale-105 transition-transform mt-0.5">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                </svg>
             </button>
-            }
         </div>
     </div>
 </div>
