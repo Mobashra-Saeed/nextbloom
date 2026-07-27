@@ -1,7 +1,7 @@
 {
   "/api": {
-    "target": "'https://nextbloom-backend.vercel.app/api/chat'",
-    "secure": false,
+    "target": "https://nextbloom-backend.vercel.app",
+    "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"
   }

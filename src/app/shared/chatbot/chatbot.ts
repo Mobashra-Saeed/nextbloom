@@ -1,7 +1,7 @@
 import { Component, signal, ViewChild, ElementRef, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 
 interface ChatMessage {
   sender: 'bot' | 'user';
@@ -12,7 +12,7 @@ interface ChatMessage {
 @Component({
   selector: 'app-chatbot',
   standalone: true,
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, FormsModule],
   templateUrl: './chatbot.html',
   styleUrls: ['./chatbot.css'],
 })
@@ -22,7 +22,7 @@ export class ChatbotComponent {
 
   isOpen = signal<boolean>(false);
   isTyping = signal<boolean>(false);
-  userInput: string = ''; 
+  userInput: string = '';
 
   // Clean, simple initial greeting
   messages = signal<ChatMessage[]>([
@@ -58,12 +58,12 @@ export class ChatbotComponent {
 
     // 1. Add User Message
     this.messages.update(msgs => [...msgs, { sender: 'user', text, type: 'text' }]);
-    this.userInput = ''; 
+    this.userInput = '';
     this.isTyping.set(true);
 
     try {
-      // 2. Fetch from backend via Angular dev proxy
-      const response = await fetch('/api/chat', {
+      // 2. Fetch directly from your live Vercel backend URL
+      const response = await fetch('https://nextbloom-backend.vercel.app/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text })
@@ -75,18 +75,20 @@ export class ChatbotComponent {
           const errData = await response.json();
           apiError = errData?.error || apiError;
         } catch {
-          // Ignore JSON parse issues and keep fallback apiError message
+          // Keep default apiError message
         }
         throw new Error(apiError);
       }
 
       const data = await response.json();
 
-      // 3. Display AI Response
-      if (data.reply) {
-        this.messages.update(msgs => [...msgs, { sender: 'bot', text: data.reply, type: 'text' }]);
+      // 3. Read reply or text from backend response
+      const botReply = data.reply || data.text;
+
+      if (botReply) {
+        this.messages.update(msgs => [...msgs, { sender: 'bot', text: botReply, type: 'text' }]);
       } else {
-        this.messages.update(msgs => [...msgs, { sender: 'bot', text: "Oops! Error... Please try again.", type: 'text' }]);
+        this.messages.update(msgs => [...msgs, { sender: 'bot', text: "Oops! Received empty response from AI.", type: 'text' }]);
       }
 
     } catch (error) {
