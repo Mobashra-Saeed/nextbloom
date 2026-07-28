@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-not-found',
   standalone: true,
@@ -10,13 +9,13 @@ import { Router } from '@angular/router';
 export class NotFoundComponent {
   private router = inject(Router);
 
+
   goHome(): void {
     this.router.navigate(['/']);
   }
 
+  // page-not-found.component.ts
   openFairyChat(): void {
-    this.router.navigate(['/']).then(() => {
-      // Logic to pop open your fairy chat drawer automatically
-    });
+    this.router.navigate(['/chatbot']);
   }
 }

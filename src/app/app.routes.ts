@@ -31,6 +31,12 @@ export const routes: Routes = [
             .then(m => m.CheckoutComponent)
     },
     {
+        path: 'chatbot',
+        loadComponent: () => import('./shared/chatbot/chatbot')
+        .then(m => m.ChatbotComponent)
+    },
+    {
+
         path: '**',
         component: NotFoundComponent
     }

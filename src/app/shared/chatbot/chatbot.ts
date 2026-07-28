@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+
 interface ChatMessage {
   sender: 'bot' | 'user';
   text: string;
@@ -105,4 +106,4 @@ export class ChatbotComponent {
       this.chatScrollContainer.nativeElement.scrollTop = this.chatScrollContainer.nativeElement.scrollHeight;
     }
   }
-}
+  }
