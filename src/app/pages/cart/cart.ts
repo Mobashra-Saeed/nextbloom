@@ -1,11 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { CartItem, EcommerceStore } from '../../store/ecommerce.store';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, CurrencyPipe, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './cart.html',
   styleUrls: ['./cart.css'],
 })

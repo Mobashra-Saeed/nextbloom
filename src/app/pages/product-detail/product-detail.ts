@@ -1,12 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
 import { EcommerceStore } from '../../store/ecommerce.store';
 
 @Component({
     selector: 'app-product-detail',
     standalone: true,
-    imports: [RouterLink, CurrencyPipe],
+    imports: [RouterLink],
     templateUrl: './product-detail.html',
     styleUrls: ['./product-detail.css']
 })

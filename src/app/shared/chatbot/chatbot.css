@@ -13,3 +13,33 @@
 .typing-dot-2 {
 	animation-delay: 300ms;
 }
+
+.chatbot-window {
+	min-height: 24rem;
+	max-height: 85vh;
+	width: min(100vw - 1rem, 28rem);
+}
+
+.chatbot-header {
+	min-width: 0;
+}
+
+.chatbot-header-controls {
+	min-width: 0;
+	max-width: 100%;
+}
+
+.chatbot-voice-select {
+	max-width: 180px;
+	min-width: 0;
+}
+
+.chatbot-header-controls {
+	min-width: 0;
+}
+
+.chatbot-voice-select {
+	max-width: 180px;
+	min-width: 0;
+}
+

@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EcommerceStore, Product } from '../../store/ecommerce.store';
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './wishlist.html',
   styleUrl: './wishlist.css',
 })

@@ -1,13 +1,23 @@
-import { Component, signal, ViewChild, ElementRef, inject, effect } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef, inject, effect, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { Subscription } from 'rxjs';
+import { VoiceService } from '../../services/voice';
 
 interface ChatMessage {
   sender: 'bot' | 'user';
   text: string;
   type?: 'text' | 'catalog-link' | 'crystal-preview';
+}
+
+interface ChatSuccessResponse {
+  reply?: string;
+  text?: string;
+}
+
+interface ChatErrorResponse {
+  error?: string;
 }
 
 @Component({
@@ -17,20 +27,27 @@ interface ChatMessage {
   templateUrl: './chatbot.html',
   styleUrls: ['./chatbot.css'],
 })
-export class ChatbotComponent {
+export class ChatbotComponent implements OnInit, OnDestroy {
   private router = inject(Router);
+  private voiceService = inject(VoiceService);
+
   @ViewChild('chatScroll') private chatScrollContainer!: ElementRef;
 
   isOpen = signal<boolean>(false);
   isTyping = signal<boolean>(false);
   userInput: string = '';
 
-  // Clean, simple initial greeting
+  autoSpeak = signal<boolean>(true);
+  isListening = signal<boolean>(false);
+  availableVoices = signal<string[]>([]);
+  selectedVoiceName = signal<string>('');
+
+  private subs = new Subscription();
+
   messages = signal<ChatMessage[]>([
     { sender: 'bot', text: 'Welcome to NextBloom! ✨ I am your guide. How can I help you with our custom creations today?', type: 'text' }
   ]);
 
-  // Kept your crystal data just in case you want to trigger it from the AI later!
   crystalData = [
     { name: 'Soft Rose & Pearl', color: 'bg-[var(--brand-pink)]/40 border-[var(--brand-pink)]/60', energy: 'Perfect for Romantic Gajray & Bracelets' },
     { name: 'Midnight Onyx', color: 'bg-[var(--text-taupe)] border-[var(--text-taupe)] text-[var(--surface-white)]', energy: 'Ideal for Protective Anklets & Counters' },
@@ -49,6 +66,35 @@ export class ChatbotComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.subs.add(
+      this.voiceService.isListening$.subscribe((listening: boolean) => {
+        this.isListening.set(listening);
+      })
+    );
+
+    this.subs.add(
+      this.voiceService.transcript$.subscribe((text: string) => {
+        if (text) {
+          this.userInput = text;
+          this.sendMessage();
+        }
+      })
+    );
+
+    this.subs.add(
+      this.voiceService.availableVoices$.subscribe((voices: string[]) => {
+        this.availableVoices.set(voices);
+      })
+    );
+
+    this.subs.add(
+      this.voiceService.selectedVoiceName$.subscribe((voiceName: string) => {
+        this.selectedVoiceName.set(voiceName);
+      })
+    );
+  }
+
   toggleChat(): void {
     this.isOpen.update(v => !v);
   }
@@ -57,13 +103,11 @@ export class ChatbotComponent {
     const text = this.userInput.trim();
     if (!text) return;
 
-    // 1. Add User Message
     this.messages.update(msgs => [...msgs, { sender: 'user', text, type: 'text' }]);
     this.userInput = '';
     this.isTyping.set(true);
 
     try {
-      // 2. Fetch directly from your live Vercel backend URL
       const response = await fetch('https://nextbloom-backend.vercel.app/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -73,23 +117,25 @@ export class ChatbotComponent {
       if (!response.ok) {
         let apiError = `Chat API request failed with status ${response.status}`;
         try {
-          const errData = await response.json();
-          apiError = errData?.error || apiError;
+          const errData = await response.json() as ChatErrorResponse;
+          apiError = errData.error ?? apiError;
         } catch {
-          // Keep default apiError message
+          // Keep default error
         }
         throw new Error(apiError);
       }
 
-      const data = await response.json();
-
-      // 3. Read reply or text from backend response
-      const botReply = data.reply || data.text;
+      const data = await response.json() as ChatSuccessResponse;
+      const botReply = data.reply ?? data.text;
 
       if (botReply) {
         this.messages.update(msgs => [...msgs, { sender: 'bot', text: botReply, type: 'text' }]);
+
+        if (this.autoSpeak()) {
+          this.voiceService.speak(botReply);
+        }
       } else {
-        this.messages.update(msgs => [...msgs, { sender: 'bot', text: "Oops! Received empty response from AI.", type: 'text' }]);
+        this.messages.update(msgs => [...msgs, { sender: 'bot', text: 'Oops! Received empty response from AI.', type: 'text' }]);
       }
 
     } catch (error) {
@@ -106,4 +152,33 @@ export class ChatbotComponent {
       this.chatScrollContainer.nativeElement.scrollTop = this.chatScrollContainer.nativeElement.scrollHeight;
     }
   }
+
+  toggleSound(): void {
+    this.autoSpeak.update(v => !v);
+    if (!this.autoSpeak()) {
+      this.voiceService.stopSpeaking();
+    }
   }
+
+  toggleListening(): void {
+    if (this.isListening()) {
+      this.voiceService.stopListening();
+    } else {
+      this.voiceService.startListening();
+    }
+  }
+
+  onVoiceChange(event: Event): void {
+    const target = event.target as HTMLSelectElement | null;
+    if (!target?.value) {
+      return;
+    }
+
+    this.voiceService.setPreferredVoiceByName(target.value);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+    this.voiceService.stopSpeaking();
+  }
+}
