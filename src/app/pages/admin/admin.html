@@ -1,0 +1,101 @@
+<main class="admin-page">
+    <section class="admin-shell">
+        <div class="admin-topbar">
+            <a routerLink="/products" class="back-link">Back to Main Website</a>
+            <h1> Admin Panel</h1>
+        </div>
+
+
+
+        <section *ngIf="!isAuthenticated" class="card login-card">
+            <h2>Admin Sign In</h2>
+            <label for="adminPassword">Password</label>
+            <input id="adminPassword" type="password" [(ngModel)]="passwordInput" placeholder="Enter admin password" />
+            <button type="button" (click)="login()">Enter Admin Panel</button>
+            <p *ngIf="loginError" class="error">{{ loginError }}</p>
+        </section>
+
+        <section *ngIf="isAuthenticated" class="admin-content">
+            <div class="card form-card">
+                <div class="panel-header-row">
+                    <h2>Add New Product</h2>
+                    <button type="button" class="secondary" (click)="logout()">Logout</button>
+                </div>
+
+                <div class="grid">
+                    <label>
+                        Product Name
+                        <input type="text" [(ngModel)]="form.name" placeholder="e.g. Tulip Charm Bracelet" />
+                    </label>
+
+                    <label>
+                        Category
+                        <input type="text" [(ngModel)]="form.category" placeholder="e.g. Beaded Bracelets" />
+                    </label>
+
+                    <label>
+                        Price (PKR)
+                        <input type="number" [(ngModel)]="form.price" min="1" />
+                    </label>
+
+                    <label>
+                        Original Price (optional)
+                        <input type="number" [(ngModel)]="form.originalPrice" min="1" />
+                    </label>
+
+                    <label>
+                        Badge
+                        <select [(ngModel)]="form.badge">
+                            <option value="">None</option>
+                            <option value="New">New</option>
+                            <option value="Bestseller">Bestseller</option>
+                            <option value="Sale">Sale</option>
+                        </select>
+                    </label>
+
+                    <label class="stock-toggle">
+                        <input type="checkbox" [(ngModel)]="form.inStock" />
+                        In Stock
+                    </label>
+                </div>
+
+                <label>
+                    Image URL
+                    <input type="text" [(ngModel)]="form.imageURL"
+                        placeholder="assets/images/products/your-image.jpg or https://..." />
+                </label>
+
+                <label>
+                    Or Upload Image
+                    <input type="file" accept="image/*" (change)="onImageSelected($event)" />
+                </label>
+
+                <div *ngIf="form.imageURL" class="preview-wrap">
+                    <p>Image Preview</p>
+                    <img [src]="form.imageURL" alt="Product image preview" title="Product image preview" />
+                </div>
+
+                <button type="button" (click)="addProduct()">Add Product</button>
+                <p *ngIf="actionMessage" class="status">{{ actionMessage }}</p>
+            </div>
+
+            <div class="card catalog-card">
+                <h2>Manage Existing Products</h2>
+                <p class="subtle">Total products: {{ store.products().length }}</p>
+
+                <div class="catalog-list">
+                    <article class="catalog-item" *ngFor="let product of store.products()">
+                        <img [src]="product.imageURL" [alt]="product.name" title="Catalog product image" />
+                        <div class="meta">
+                            <h3>{{ product.name }}</h3>
+                            <p>Category: {{ product.category }}</p>
+                            <p>Price: Rs {{ product.price }}</p>
+                            <p>Status: {{ product.inStock ? 'In Stock' : 'Out of Stock' }}</p>
+                        </div>
+                        <button type="button" class="danger" (click)="deleteProduct(product)">Delete</button>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>

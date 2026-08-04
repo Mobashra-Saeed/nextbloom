@@ -53,6 +53,12 @@
                         {{ store.cartItemsCount() }}
                     </span>
                 </button>
+                <a
+                    [routerLink]="['/admin']"
+                    class="text-xs sm:text-sm font-semibold tracking-wide border border-[var(--line-soft)] px-2.5 py-1.5 rounded-full hover:text-[var(--brand-pink-dark)] hover:border-[var(--brand-pink-dark)] transition-colors duration-300"
+                    title="Admin Panel">
+                    Admin
+                </a>
             </div>
         </div>
     </header>

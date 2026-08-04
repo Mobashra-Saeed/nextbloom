@@ -36,6 +36,10 @@ export const routes: Routes = [
         .then(m => m.ChatbotComponent)
     },
     {
+        path: 'admin',
+        loadComponent: () => import('./pages/admin/admin').then(m => m.AdminComponent)
+    },
+    {
 
         path: '**',
         component: NotFoundComponent

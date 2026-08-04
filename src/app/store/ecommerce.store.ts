@@ -16,6 +16,16 @@ export interface CartItem extends Product {
     quantity: number;
 }
 
+export interface NewProductInput {
+    name: string;
+    price: number;
+    originalPrice?: number;
+    imageURL: string;
+    badge?: 'New' | 'Bestseller' | 'Sale' | '';
+    category: string;
+    inStock: boolean;
+}
+
 // 2. Seed product data
 const initialProducts: Product[] = [
     { id: '1', name: '2-Chain Butterfly Name Bracelet (Black)', price: 350, imageURL: 'assets/images/products/2chain_butterfly_name_bracelet_black.jpg', badge: 'Bestseller', category: 'Beaded Bracelets', inStock: true },
@@ -113,11 +123,14 @@ const initialProducts: Product[] = [
 
 @Injectable({ providedIn: 'root' })
 export class EcommerceStore {
+    private readonly PRODUCTS_KEY = 'nextbloom_products';
     private readonly CART_KEY = 'nextbloom_cart';
     private readonly WISHLIST_KEY = 'nextbloom_wishlist';
 
     // --- PRIVATE STATE SIGNALS ---
-    private readonly productsState = signal<Product[]>(initialProducts);
+    private readonly productsState = signal<Product[]>(
+        this.loadFromStorage<Product[]>(this.PRODUCTS_KEY, initialProducts)
+    );
     private readonly categoryState = signal<string>('all');
 
     // Initialize states from localStorage if existing data is present
@@ -130,6 +143,11 @@ export class EcommerceStore {
     private readonly checkoutAccessState = signal<boolean>(false);
 
     constructor() {
+        // Automatically sync product catalog state to localStorage whenever it changes
+        effect(() => {
+            localStorage.setItem(this.PRODUCTS_KEY, JSON.stringify(this.productsState()));
+        });
+
         // Automatically sync cart state to localStorage whenever it changes
         effect(() => {
             localStorage.setItem(this.CART_KEY, JSON.stringify(this.cartItemsState()));
@@ -167,6 +185,27 @@ export class EcommerceStore {
     // --- ACTIONS / METHODS ---
     setCategory(category: string): void {
         this.categoryState.set(category);
+    }
+
+    addProduct(productInput: NewProductInput): Product {
+        const newProduct: Product = {
+            ...productInput,
+            id: this.generateProductId(),
+            badge: productInput.badge || undefined,
+            originalPrice:
+                productInput.originalPrice && productInput.originalPrice > 0
+                    ? productInput.originalPrice
+                    : undefined,
+        };
+
+        this.productsState.update((products) => [newProduct, ...products]);
+        return newProduct;
+    }
+
+    removeProduct(productId: string): void {
+        this.productsState.update((products) => products.filter((product) => product.id !== productId));
+        this.cartItemsState.update((items) => items.filter((item) => item.id !== productId));
+        this.wishlistItemsState.update((items) => items.filter((item) => item.id !== productId));
     }
 
     addToCart(product: Product): void {
@@ -242,5 +281,9 @@ export class EcommerceStore {
             console.error(`Error reading ${key} from localStorage:`, error);
             return defaultValue;
         }
+    }
+
+    private generateProductId(): string {
+        return `${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
     }
 }

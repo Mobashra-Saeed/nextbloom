@@ -1,0 +1,287 @@
+:host {
+    display: block;
+}
+
+.admin-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(900px 450px at 8% -10%, var(--brand-pink), transparent),
+        radial-gradient(780px 400px at 100% 8%, var(--brand-pink-dark), transparent),
+        linear-gradient(140deg, var(--bg-slider) 0%, var(--bg-light) 45%, var(--surface-white) 100%);
+    padding: 2.4rem 1rem 3rem;
+}
+
+.admin-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.admin-topbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.admin-topbar h1 {
+    margin: 0;
+    font-size: clamp(1.55rem, 2.6vw, 2.2rem);
+    color: var(--text-taupe);
+    font-family: var(--font-serif);
+    letter-spacing: 0.03em;
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--brand-pink-dark);
+    background: var(--surface-white);
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    padding: 0.52rem 1rem;
+    font-weight: 600;
+    transition: all 220ms ease;
+    box-shadow: 0 6px 16px -10px var(--brand-pink-dark);
+}
+
+.back-link:hover {
+    color: var(--surface-white);
+    background: linear-gradient(120deg, var(--brand-pink-dark), var(--brand-pink));
+    border-color: var(--brand-pink-dark);
+    transform: translateY(-1px);
+}
+
+.security-note {
+    margin: 0.95rem 0 1.4rem;
+    color: var(--text-taupe);
+}
+
+.admin-content {
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+}
+
+.card {
+    background: var(--surface-white);
+    border: 1px solid var(--line-soft);
+    border-radius: 18px;
+    padding: 1.08rem;
+    box-shadow:
+        0 14px 28px -18px var(--text-taupe),
+        0 10px 20px -18px var(--brand-pink);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+}
+
+.login-card {
+    max-width: 420px;
+}
+
+.card h2 {
+    margin-top: 0;
+    color: var(--text-taupe);
+    font-family: var(--font-serif);
+    letter-spacing: 0.02em;
+}
+
+.panel-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.75rem;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    color: var(--text-taupe);
+    font-weight: 600;
+    margin-bottom: 0.65rem;
+}
+
+input,
+select,
+button {
+    font: inherit;
+}
+
+input,
+select {
+    border: 1px solid var(--line-soft);
+    border-radius: 10px;
+    padding: 0.6rem 0.7rem;
+    background: var(--surface-white);
+    color: var(--text-taupe);
+    transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--brand-pink-dark);
+    box-shadow: 0 0 0 2px var(--brand-pink);
+    background: var(--surface-white);
+}
+
+.stock-toggle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.4rem;
+}
+
+button {
+    border: 1px solid var(--brand-pink-dark);
+    border-radius: 999px;
+    padding: 0.78rem 1.15rem;
+    background: var(--brand-pink-dark);
+    color: var(--surface-white);
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    box-shadow: 0 10px 20px -14px var(--brand-pink-dark);
+    transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
+}
+
+button:hover {
+    filter: saturate(1.05);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 24px -14px var(--brand-pink-dark);
+}
+
+button.secondary {
+    background: var(--surface-white);
+    color: var(--brand-pink-dark);
+    border-color: var(--line-soft);
+    box-shadow: 0 8px 16px -16px var(--text-taupe);
+}
+
+button.secondary:hover {
+    background: var(--bg-light);
+    color: var(--brand-pink-dark);
+    box-shadow: 0 12px 20px -16px var(--text-taupe);
+}
+
+button.danger {
+    background: var(--brand-pink-dark);
+    color: var(--surface-white);
+    border-color: var(--brand-pink-dark);
+    align-self: center;
+}
+
+button.danger:hover {
+    background: var(--text-taupe);
+    border-color: var(--text-taupe);
+    box-shadow: 0 15px 30px -14px var(--text-taupe);
+}
+
+.preview-wrap img {
+    width: 100%;
+    max-width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid var(--line-soft);
+}
+
+.preview-wrap p {
+    margin: 0.1rem 0 0.45rem;
+    color: var(--text-taupe);
+    font-weight: 600;
+}
+
+.catalog-list {
+    max-height: 62vh;
+    overflow: auto;
+    display: grid;
+    gap: 0.7rem;
+}
+
+.catalog-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.catalog-list::-webkit-scrollbar-thumb {
+    background: var(--brand-pink);
+    border-radius: 999px;
+}
+
+.catalog-item {
+    display: grid;
+    grid-template-columns: 82px 1fr auto;
+    gap: 0.7rem;
+    align-items: center;
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    padding: 0.55rem;
+    background: var(--surface-white);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.catalog-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px -16px var(--brand-pink-dark);
+}
+
+.catalog-item img {
+    width: 82px;
+    height: 82px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.catalog-item h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-taupe);
+}
+
+.catalog-item p {
+    margin: 0.15rem 0;
+    color: var(--text-taupe);
+    font-size: 0.86rem;
+}
+
+.status {
+    color: var(--text-taupe);
+    font-weight: 600;
+}
+
+.error {
+    color: var(--brand-pink-dark);
+    font-weight: 600;
+}
+
+.subtle {
+    color: var(--text-taupe);
+}
+
+@media (max-width: 640px) {
+    .admin-page {
+        padding-top: 1rem;
+    }
+
+    .catalog-item {
+        grid-template-columns: 1fr;
+    }
+
+    .catalog-item img {
+        width: 100%;
+        height: 180px;
+    }
+
+    button.danger {
+        justify-self: stretch;
+    }
+}
